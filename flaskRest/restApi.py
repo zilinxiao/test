@@ -1,7 +1,10 @@
 from flask import Flask
 from flask import render_template,request,jsonify,json
+from os import path,walk
+
 
 app = Flask(__name__)
+
 
 userlist = [
     {
@@ -18,6 +21,9 @@ userlist = [
 @app.route('/')
 def hello():
     return render_template('index.html', users=userlist)
+@app.route('/users')
+def users():
+    return jsonify(userlist)
 
 @app.route('/add',methods=['POST'])
 def add_user():
@@ -40,6 +46,8 @@ def delete_user(name):
         if user['name'] == name:
             userlist.pop(user)
     return jsonify(userlist)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
