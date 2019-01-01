@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %} flaskRestApi {% endblock %}
+{% block csslink %}
+<link rel="stylesheet" type="text/css" href="/static/style1.css">
+<!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style1.css',_external=True)}}"> -->
+{% endblock %}
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block content %}
+<h1 class=" text-center"> 欢迎使用flaskRestApi App！</h1>
+<form method="post" action="add" class="divLayout" id="uform">
+    <div class="form-group">
+        <label for="name">用户姓名</label>
+        <input id="name" class="form-control" type="text">
+    </div>  
+    <div class="form-group">
+        <label for="age">用户年龄</label>
+        <input id="age" class="form-control" type="number">
+    </div>
+    <button class="btn btn-primary" type="button" id="load">加载</button>
+    <button class="btn btn-primary"  type="submit" id="add">添加</button>
+    <button class="btn btn-primary" type="button" id="update" >更新</button>
+    <button class="btn btn-primary" type="button" id="del" >删除</button>
+    <button class="btn btn-primary" type="button" id="select" >查询</button>
+    <!-- buttton type = submit 异步发生数据会出现问题。 -->
+</form>
+{% endblock %}
+
+{% block script %}
+    <script>
+        var bts = document.getElementsByTagName('button');
+        for (let i = 0; i < bts.length; i++) {
+            bts[i].onclick = handleButtonPress;   
+        }
+        function  handleButtonPress(e) {
+            e.preventDefault();
+            // 调用此函数来处理浏览器指派此函数处理默认行为，比如button type=submit的按钮，
+            // 默认为非ajax方式提交表单。
+            var req = new XMLHttpRequest();
+            req.onreadystatechange = hResp;
+
+            var inputs = document.getElementsByTagName('input');
+            var formData = new Object();
+            for (let i = 0; i < inputs.length; i++) {
+                formData[inputs[i].id] = inputs[i].value;
+                
+            }
+            // var formData = new FormData(document.getElementById('uform'));
+            if(e.target.id == 'load'){
+                req.open("GET",'/users');
+                // req.setRequestHeader('Cache-Control','no-cache');
+
+                req.send();
+            }
+            else if(e.target.id == 'add'){
+                req.open("POST",'/add');
+                req.setRequestHeader('Content-Type','application/json')
+                // req.setRequestHeader('Cache-Control','no-cache');
+
+                // alert(JSON.stringify(formData));
+                req.send(JSON.stringify(formData));
+                // req.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+                // req.send(formData);
+
+            }
+            else if(e.target.id == 'del'){
+                var  name = document.getElementById('name').value;
+                // alert(name);
+                req.open("DELETE",'/delete/'+name);
+                // req.setRequestHeader('Cache-Control','no-cache');
+                // req.setRequestHeader('X-HTTP-Method-Override','DELETE');
+                req.send();
+            }
+            else if(e.target.id == 'update'){
+                req.open("PUT",'/update');
+                req.setRequestHeader('Content-Type','application/json')
+                // req.setRequestHeader('Cache-Control','no-cache');
+                req.send(JSON.stringify(formData));
+
+            }
+            else if(e.target.id == 'select'){
+                var  name = document.getElementById('name').value;
+                // alert(name);
+                req.open("GET",'/users/'+name);
+                // req.setRequestHeader('Cache-Control','no-cache');
+                // req.setRequestHeader('X-HTTP-Method-Override','DELETE');
+                req.send();
+            }
+        }
+
+        function hResp(e) {
+            if(e.target.readyState == XMLHttpRequest.DONE && e.target.status == 200){
+                //方式一,通过相应函数更新表格
+                var data = JSON.parse(e.target.responseText);
+                // alert('fdsfsdf');
+                var tb='';
+                data.forEach(user => {
+                    tb += "<tr><td>" + user.name + "</td><td>" + user.age + "</td></tr>";
+                });                    
+                document.getElementById("tb").innerHTML = tb; 
+
+            }
+            
+        }
+    </script>
+{% endblock %}
+{% block body %}
+    {{super()}}
+{% endblock %}

@@ -1,0 +1,13 @@
+h1{
+    color: red
+}
+#app1{
+    width: 90%;
+    margin: 0 auto;
+}
+h1,tr > th,td{
+    text-align: center;
+}
+tr > th,td{
+    border: solid 0.5px
+}
