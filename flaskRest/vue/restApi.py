@@ -61,6 +61,6 @@ def delete_user(name):#可以是与updae类似的做法
     return jsonify(userlist), 200
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
 # debug=False,设置断点时有效，运行到断点处停止，可进入调试模式；重启调试后，重新加载数据。
 # debug=True,设置断点时无效，运行到断点处跳过断点；重启调试后，缓存上一次调试的数据。
