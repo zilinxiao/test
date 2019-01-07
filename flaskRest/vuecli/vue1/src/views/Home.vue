@@ -3,7 +3,7 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <UserOperate/>
-    <hr>
+    <br>
     <UserTable />
   </div>
 </template>
@@ -20,16 +20,6 @@ export default {
     // HelloWorld
     UserTable,
     UserOperate
-  },
-  data() {
-    return {
-      userlist: [
-        {
-          name: "xzl",
-          age: 35
-        }
-      ]
-    };
   }
-};
+}
 </script>
