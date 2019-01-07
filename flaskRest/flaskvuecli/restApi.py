@@ -2,11 +2,14 @@ from flask import Flask
 from flask import render_template,redirect,jsonify,json,request
 from os import path,walk
 from datetime import timedelta
-
+from flask_cors import CORS
 app = Flask(__name__)
 # app.config['SEND_FILE_MAX_AGE_DEFAULT'] = timedelta(seconds=1)
 #增加本行刷新静态资源，需要在浏览器开发模式下的setting选择disable cache,并且刷新网页。
 #另一种处理方式是在前端设置请求头中设置无缓存。
+
+CORS(app)
+
 userlist = [
     {
         'name': 'xzl',
@@ -21,7 +24,8 @@ userlist = [
 
 @app.route('/')
 def hello():
-    return render_template('index.html', users=userlist)
+    # return render_template('index.html', users=userlist)
+    return "Hello flask!"
     
 @app.route('/users')
 def users():
