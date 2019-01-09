@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "axios": "^0.18.0",
+    "iview": "^3.2.1"
+  }
+}
