@@ -1,7 +1,5 @@
-['[ I   - CONTACT LINE SIDE ]', '[ II  - NEGATIVE FEEDER SIDE ]','[ III - PRIMARY SIDE ]', '>>>>> branch connectors']
-{'root mean sqare': [('T绕组电流有效值（A）', 2), ('T绕组功率有效值（kVA）', 3)],'maximum': [('T绕组电流最大值（A）', 2), ('T绕组功率最大值（kVA）', 3)]}
-{'root mean sqare': [('F绕组电流有效值（A）', 2), ('F绕组功率有效值（kVA）', 3)],'maximum': [('F绕组电流最大值（A）', 2), ('F绕组功率最大值（kVA）', 3)]}
-{'root mean sqare': [('高压绕组电流有效值（A）', 2), ('高压绕组功率有效值（kVA）', 3)],'maximum': [('高压绕组电流最大值（A）', 2), ('高压绕组功率最大值（kVA）', 3)]}
-{'root mean sqare': [('下行T线电流有效值（A）', 1), ('上行T线电流有效值（A）', 2),('下行F线电流有效值（A）', 3), ('上行F线电流有效值（A）', 4)],'maximum': [('下行T线电流最大值（A）', 1), ('上行T线电流最大值（A）', 2),('下行F线电流最大值（A）', 3), ('上行F线电流最大值（A）', 4)]}
-
-
+["[ I   - CONTACT LINE SIDE ]", "[ II  - NEGATIVE FEEDER SIDE ]", "[ III - PRIMARY SIDE ]", ">>>>> branch connectors"]
+{"root mean sqare": [["T绕组电流有效值（A）", 2], ["T绕组功率有效值（kVA）", 3]], "maximum": [["T绕组电流最大值（A）", 2], ["T绕组功率最大值（kVA）", 3]]}
+{"root mean sqare": [["F绕组电流有效值（A）", 2], ["F绕组功率有效值（kVA）", 3]], "maximum": [["F绕组电流最大值（A）", 2], ["F绕组功率最大值（kVA）", 3]]}
+{"root mean sqare": [["高压绕组电流有效值（A）", 2], ["高压绕组功率有效值（kVA）", 3]], "maximum": [["高压绕组电流最大值（A）", 2], ["高压绕组功率最大值（kVA）", 3]]}
+{"root mean sqare": [["下行T线电流有效值（A）", 1], ["上行T线电流有效值（A）", 2], ["下行F线电流有效值（A）", 3], ["上行F线电流有效值（A）", 4]], "maximum": [["下行T线电流最大值（A）", 1], ["上行T线电流最大值（A）", 2], ["下行F线电流最大值（A）", 3], ["上行F线电流最大值（A）", 4]]}

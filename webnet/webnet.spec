@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['webnet.py'],
-             pathex=['D:\\program\\git@xzl\\webnet'],
+             pathex=['D:\\program\\git@xzl\\test\\webnet'],
              binaries=[],
              datas=[],
              hiddenimports=[],

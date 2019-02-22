@@ -112,7 +112,8 @@ def writeRestultToFile():
         filetypes = [('txt files','.txt'),('all file','.*')] )
 
     with  open(filename,'w') as f:
-        for i in range(4):
+        elementcout = len(elementType)
+        for i in range(elementcout):
             ret = analysisElements(getElementForType(es, elementType[i]), 
             elementType[i], argstype[i])
             rows = []
@@ -134,25 +135,45 @@ def writeRestultToFile():
             #             for v in args:
             #                 rows[k] += args[v] +'\t'
             #                 k += 1
-            l = max([len(value) for value in ret.values()])
-            for j, r in enumerate(ret):
-                if j == 0:
-                    if i == 0:
-                        row = '项目名称\t'+r+'\t'
-                        rows.append(row)
-                    for args in ret[r]:
-                        for (k,v) in args.items():
-                            row = k+'\t' + v+'\t'
-                            rows.append(row)
+            #找出最大行数，主要应用于馈线输出
+            def getmaxoutrows(ret):
+                l = max([len(value) for value in ret.values()])
+                if l<=0:return l,None
+                elif l ==1:
+                    for v in ret.values():
+                        return l,v
                 else:
-                    k = 0
-                    if i == 0:
-                        rows[0] += r+'\t'
-                        k += 1
-                    for args in ret[r]:
+                    for v in ret.values():
+                        if len(v) == l:
+                            return l,v
+            l,rs = getmaxoutrows(ret)
+
+            #输出行名称
+            if i == 0:
+                row = '项目名称\t'
+                rows.append(row)
+            for r in rs:
+                for k,v in r.items():
+                    row = k+'\t'
+                    rows.append(row)
+            #输出数据
+            for r in ret:
+                k = 0
+                if i == 0:
+                    rows[0] += r+'\t'
+                    k += 1
+                for j in range(l):
+                    if j < len(ret[r]):
+                        args = ret[r][j]
                         for v in args:
                             rows[k] += args[v] +'\t'
                             k += 1
+                    else:
+                        args = rs[j]
+                        for v in args:
+                            rows[k] +='  \t'
+                            k += 1
+            #写入文件   
             for row in rows:
                 f.writelines(row + '\n')
 
@@ -194,7 +215,7 @@ argstype = [targs, fargs, tfargs, bargs]
 #         for args in argstype:
 #            f.write('\n')
 #            json.dump(args,f,ensure_ascii=False)
-
+# saveArgs(r'.\webnet\argstype.txt')
 ret = loadArgs()
 if ret:
     elementType,targs,fargs,tfargs,bargs = ret
